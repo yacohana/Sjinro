@@ -1,0 +1,27 @@
+extends layout
+
+append css
+  link(rel='stylesheet', href='/css/bootstrap.dark.css')
+
+block content
+  h1 #{title}
+  .container
+    table.table.table-hover.table-condensed
+      tr
+        th username
+        th screenName
+        th skype
+        th Admin?
+        th Delete
+      for auth,index in auths
+        tr
+          td #{auth.username}
+          td #{auth.screenname}
+          td #{auth.skype}
+          td
+            a.btn.btn-primary.btn-sm(href="/useradmin?username=#{auth.username}") #{auth.admin}
+          td
+            a.btn.btn-danger.btn-sm(href="/userdel?username=#{auth.username}") Delete
+  a(href="/user4debug").btn.btn-primary UserAdd4debug
+  hr
+  a(href="/admin").btn.btn-primary Back

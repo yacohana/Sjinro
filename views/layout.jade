@@ -1,0 +1,39 @@
+- var jobs = ["wereworf","seer","medium","bodyguard","lunatic","freemason","fox","cat"]
+- var jobnames = {"villager":"村人","wereworf":"人狼","seer":"占い師","medium":"霊能者","bodyguard":"狩人","lunatic":"狂人","freemason":"共有者","fox":"妖狐","cat":"猫又"}
+
+doctype html
+html
+  head
+    title Sjinro - #{title}
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    link(rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/themes/smoothness/jquery-ui.css")
+    link(rel="stylesheet" href="/css/magic.min.css")
+    link(rel='stylesheet', href='/css/style.css')
+    block css
+    script(type="text/javascript")
+      if(user)
+        | var user = {"username": "!{user.username}"};
+      if(players)
+        | var players = !{JSON.stringify(players)};
+      else
+        | var players = new Array();
+      if(status)
+        | var status = "!{status}";
+      if(admin)
+        | var admin = true;
+  body(ng-app="sjinro")
+    .modal
+    block content
+    hr
+    p.pull-right Sjinro Ver 1.0.0 / system by yacohana / illust by Drizzle
+    script(src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js")
+    script(src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js")
+    script(src="/js/jquery.redirect.min.js")
+    script(src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.13/angular.js")
+    script(src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.10.0/ui-bootstrap-tpls.min.js")
+    script(src="/socket.io/socket.io.js")
+    script(src="/js/overlay.js")
+    script(src="/js/sjinro.js")
+    block js

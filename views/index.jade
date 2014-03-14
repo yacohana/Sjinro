@@ -1,0 +1,17 @@
+extends layout
+
+append css
+  link(rel='stylesheet', href='/css/bootstrap.dark.css')
+
+block content
+  h1 SJinro
+  .container
+    img(src="/img/title.png")
+    p Sign upでアカウント作成後、Loginでゲームに参加できます。
+    a(href="/game").btn.btn-primary.btn-lg Login
+    a(href="/rule").btn.btn-primary.btn-lg Rule
+    if user != undefined
+      if user.admin
+        a(href="/admin").btn.btn-primary.btn-lg Admin
+    a(href="/signup").btn.btn-primary.btn-lg.pull-right Sign up
+

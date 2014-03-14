@@ -1,0 +1,14 @@
+extends game
+
+append css
+  link(rel='stylesheet', href='/css/bootstrap.dark.css')
+
+append players
+  include includes/players
+
+append action
+  include includes/voteList
+  include includes/timer
+
+append chat
+  include includes/chat

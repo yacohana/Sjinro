@@ -1,0 +1,13 @@
+extends game
+
+append css
+  link(rel='stylesheet', href='/css/bootstrap.light.css')
+
+append players
+  include includes/players
+
+append action
+  if morningDeads.length > 0
+  include includes/timer
+append chat
+  include includes/chat

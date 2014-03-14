@@ -1,0 +1,13 @@
+.players(ng-controller="playersCtrl")
+  table.table.table-condensed
+    tr(ng-repeat="(username, player) in players", ng-class="(player.ready||window.status=='firstnight')?'active':''")
+      td.col-sm-4 {{player.screenname}}
+      td.col-sm-4
+        span(ng-style="getStyle(player,'job')") {{jobnames[player.job]}}
+      td.col-sm-4
+        span(ng-style="getStyle(player,'living')") {{player.living?"生存":"死亡"}}
+  if user.job !== undefined && user.job != ""
+    .container
+      img(src="/img/#{user.job}.png", style="margin: 10px")
+
+

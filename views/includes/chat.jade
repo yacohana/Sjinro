@@ -1,0 +1,10 @@
+.chat(ng-controller="chatCtrl")
+  .row
+    form#chatForm(role="form", name="chat", ng-submit='submit()', novalidate, form-autofill-fix)
+      input.col-sm-10(type="text", name="chatInput", required, ng-model="data.input", ng-disabled="!entried||!chatable", style="height: 25px; color: #000;")
+      button.btn.btn-primary.col-sm-2.btn-xs(type='submit', ng-disabled="chat.$invalid||sent||!entried||!chatable", style="height: 25px;") Submit
+  .row.chatlog
+    p(ng-repeat="item in chats | orderBy:'date':true", style="margin:2px 0 2px 5px")
+      span [{{item.from}}]&nbsp;
+      strong {{item.text}}&nbsp;&nbsp;
+      span.small ({{item.date | date:'h:m:s' }})

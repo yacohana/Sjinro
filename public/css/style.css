@@ -1,0 +1,53 @@
+body {
+    padding: 50px;
+    font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+    color: #00B7FF;
+}
+
+div.chatlog {
+    overflow: auto;
+    max-height: 500px;
+}
+
+.magictime.casting {
+    webkit-animation-duration: 0.5s;
+    -moz-animation-duration: 0.5s;
+    -o-animation-duration: 0.5s;
+    animation-duration: 0.5s;
+}
+
+.red {
+    color: red;
+}
+
+.yellow {
+    color: yellow;
+}
+
+.ruleImg {
+    width: 64px;
+    height: 128px;
+    transition:0.5s ease 0.2s;
+    -moz-transition: 0.5s ease 0.2s;
+    -webkit-transition: 0.5s ease 0.2s;
+    -o-transition:0.5s ease 0.2s;
+    z-index: 10;
+
+}
+
+.ruleImg:hover {
+    transform: rotateY(360deg) scale(2);
+    -moz-transform: rotateY(360deg) scale(2);
+    -webkit-transform: rotateY(360deg) scale(2);
+    -o-transform: rotateY(360deg) scale(2);
+    z-index: 15;
+
+}
+
+.popover {
+    font-size: 11px;
+    color: #666;
+}

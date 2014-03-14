@@ -1,0 +1,16 @@
+extends game
+
+append css
+  link(rel='stylesheet', href='/css/bootstrap.dark.css')
+
+append players
+  include includes/players
+
+append action
+  p あなたは <strong>#{jobnames[user.job]}</strong> です。
+  .container
+    img.casting.magictime(src="/img/#{user.job}.png", style="margin: 10px")
+  include includes/entryButton
+
+append chat
+  include includes/chat

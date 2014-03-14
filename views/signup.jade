@@ -1,0 +1,31 @@
+extends layout
+
+append css
+  link(rel='stylesheet', href='/css/bootstrap.dark.css')
+  link(rel='stylesheet', href='/css/login.css')
+
+block content
+  #container
+    form#signupForm.form-signin(ng-controller="signupFormCtrl", ng-submit='submit()', name="signup",  novalidate, form-autofill-fix)
+      h2.form-signin-heading Sign Up
+
+      input.form-control(type='text', name="username", placeholder='User name', required, autofocus, ng-model="data.username", ng-minlength="4", ng-maxlength="24", ng-pattern="/^[a-zA-Z0-9]*$/")
+      span.error(ng-show="signup.username.$error.minlength") Too short.
+      span.error(ng-show="signup.username.$error.maxlength") Too long.
+      span.error(ng-show="signup.username.$error.pattern") Need alphanumeric.
+      
+      input.form-control(type='password', name="password", placeholder='Password', required, ng-model="data.password", ng-pattern="/^[a-zA-Z0-9]*$/")
+      span.error(ng-show="signup.password.$error.pattern") Need alphanumeric.
+      
+      input.form-control(type='text', name="screenname", placeholder='Screen name', required, ng-model="data.screenname", ng-minlength="2", ng-maxlength="24")
+      span.error(ng-show="signup.screenname.$error.minlength") Too short.
+      span.error(ng-show="signup.screenname.$error.maxlength") Too long.
+      
+      input.form-control(type='text', name="skype", placeholder='Skype ID', required, ng-model="data.skype")
+
+      button(class='btn btn-lg btn-primary btn-block', type='submit', ng-disabled="signup.$invalid || sent")
+        | {{buttonmsg}}
+
+      p {{errormsg}}
+  hr
+  a(href="/").btn.btn-primary Back

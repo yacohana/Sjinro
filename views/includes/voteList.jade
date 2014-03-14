@@ -1,0 +1,15 @@
+if voteList.length > 0
+  h4 投票結果
+  table.table.table-condensed
+    for player in voteList
+      tr
+        td #{players[player.username].screenname}
+        td #{player.voted}
+  h4 投票詳細
+  table.table.table-condensed
+    for player, username in players
+      tr
+        if players[player.action_to] !== undefined
+          td #{player.screenname}
+          td ->
+          td #{players[player.action_to].screenname}

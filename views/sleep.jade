@@ -1,0 +1,24 @@
+extends game
+
+append css
+  link(rel='stylesheet', href='/css/bootstrap.light.css')
+
+append players
+  include includes/players
+
+append action
+  p
+    span 投票の結果
+    strong(style="color:red") #{players[voteList[0].username].screenname}
+    span が処刑されました。
+  if morningDeads.length > 0
+    each username in morningDeads
+      p
+        strong(style="color:red") #{players[username].screenname}
+        span は道連れとなり死亡しました。
+  p 処刑された人の遺言を聞き、全員マイクをミュートしてください。
+  include includes/voteList
+  include includes/readyButton
+
+append chat
+  include includes/chat

@@ -1,0 +1,16 @@
+extends game
+
+append css
+  link(rel='stylesheet', href='/css/bootstrap.dark.css')
+
+append players
+  include includes/players
+
+append action
+  h4
+    strong #{jobnames[winner]}陣営
+    span の勝利です。
+  include includes/readyButton
+
+append chat
+  include includes/chat

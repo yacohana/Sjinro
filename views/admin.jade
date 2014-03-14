@@ -1,0 +1,39 @@
+extends game
+
+append css
+  link(rel='stylesheet', href='/css/bootstrap.dark.css')
+
+append players
+  include includes/players
+
+append action
+  include includes/timer
+  form#gameSettingsForm(role="form", ng-controller="adminFormCtrl", name="gameSettings", novalidate, form-autofill-fix, ng-submit="submit()")
+    .row
+      button.btn.btn-lg.btn-info.col-sm-12(type='submit') TimerNext
+      - var callUri = new String();
+      for player, username in players
+        if player.skype !== undefined && username != user.username
+          - callUri += player.skype + ";"
+      - callUri = callUri.slice(0,-1) + "?call"
+      a.btn.btn-lg.btn-default.col-sm-12(href="skype:#{callUri}") Skype
+    hr
+    .row
+      .col-sm-3
+        input(type='checkbox', name="debugMode", ng-model="debugMode", ng-change="changedDebugMode()")
+      .col-sm-9
+        span デバッグモード
+  hr
+  .row
+    a(href="/reset").btn.btn-primary.btn-lg.col-sm-12 Reset
+    a(href="/reset4debug").btn.btn-primary.btn-lg.col-sm-12 reset4Debug
+  hr
+  .row
+    a(href="/authAdmin").btn.btn-primary.btn-lg.col-sm-12 Auth Admin
+append chat
+  .chat(ng-controller="chatCtrl")
+    .row.chatlog
+      p(ng-repeat="item in chats | orderBy:'date':true", style="margin:2px 0 2px 5px")
+        span [{{item.from}}->{{item.to}}]&nbsp;
+        strong {{item.text}}&nbsp;&nbsp;
+        span.small ({{item.date | date:'h:m:s' }})

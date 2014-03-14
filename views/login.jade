@@ -1,0 +1,18 @@
+extends layout
+
+append css
+  link(rel='stylesheet', href='/css/bootstrap.dark.css')
+  link(rel='stylesheet', href='/css/login.css')
+
+block content
+  #container
+    form#loginForm.form-signin(ng-submit='submit()', name="login", method="post", action="/login")
+      h2.form-signin-heading Login
+      input.form-control(type='text', name="username", placeholder='User name', ng-reqired, autofocus)
+      input.form-control(type='password', name="password", placeholder='Password', ng-reqired)
+      button(class='btn btn-lg btn-primary btn-block', type='submit')
+        | Login
+      if(message)
+        p= message
+  hr
+  a(href="/").btn.btn-primary Back

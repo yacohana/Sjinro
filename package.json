@@ -1,0 +1,22 @@
+{
+  "name": "SJinro",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "express": "3.4.8",
+    "jade": "*",
+    "socket.io": "~0.9.16",
+    "mongoose": "~3.8.7",
+    "passport": "~0.2.0",
+    "passport-local": "~0.1.6",
+    "connect-flash": "~0.1.1",
+  },
+  "description": "Skype Jinro on Node.js",
+  "main": "app.js",
+  "devDependencies": {},
+  "author": "yacohana",
+  "license": "MIT"
+}

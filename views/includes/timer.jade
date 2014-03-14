@@ -1,0 +1,2 @@
+div(ng-controller="timerCtrl", name="timer")
+  h3 残り {{("00"+(timer-timer%60)/60).slice(-2)}} : {{("00"+timer%60).slice(-2)}}

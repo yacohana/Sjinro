@@ -1,0 +1,48 @@
+extends game
+
+append css
+  link(rel='stylesheet', href='/css/bootstrap.dark.css')
+
+append players
+  include includes/players
+  form#entryForm(role="form", ng-controller="entryFormCtrl", name="entry", ng-submit='submit()', novalidate, form-autofill-fix)
+    button.btn.btn-default(type='submit', ng-disabled="sent") {{buttonmsg}}
+
+append action
+  form#gameSettingsForm(role="form", ng-controller="gameSettingsFormCtrl", name="gameSettings", novalidate, form-autofill-fix)
+    table.table.table-condensed.table-hover
+      tr
+        th.col-sm-6
+          span.pull-right 役職
+        th.col-sm-6 人数
+      tr
+        td
+          span.pull-right 村人
+        td
+          input.form-control.input-sm.job-input-villager(type='input', name="villager", required, ng-model="data.villager", disabled)
+      for job, index in jobs
+        tr
+          td
+            span.pull-right= jobnames[jobs[index]]
+          td
+            input.form-control.input-sm.job-input(type='input', name="#{job}", required, ng-model="data.#{job}", ng-change="changedJob('#{job}')", ng-disabled="!entried")
+    table.table.table-condensed.table-hover
+      tr
+        td.col-sm-6
+          span.pull-right 昼時間(分)
+        td.col-sm-6
+          input.form-control.input-sm.time-input(type='input', name="daytime", required, ng-model="data.daytime", ng-change="changedTime('daytime')", ng-disabled="!entried")
+      tr
+        td.col-sm-6
+          span.pull-right 夜時間(分)
+        td.col-sm-6
+          input.form-control.input-sm.time-input(type='input', name="nighttime", required, ng-model="data.nighttime", ng-change="changedTime('nighttime')", ng-disabled="!entried")
+      tr
+        td.col-sm-6
+          span.pull-right 初日村人
+        td.col-sm-6
+          input(type='checkbox', name="alwaysDummyVillager", required, ng-model="data.alwaysDummyVillager", ng-change="changedAlwaysDummyVillager()", ng-disabled="!entried")
+  include includes/entryButton
+
+append chat
+  include includes/chat

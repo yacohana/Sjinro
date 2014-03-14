@@ -1,0 +1,21 @@
+extends game
+
+append css
+  link(rel='stylesheet', href='/css/bootstrap.light.css')
+
+append players
+  include includes/players
+
+append action
+  form#actionForm(role="form", ng-controller="executeFormCtrl", name="action", novalidate, form-autofill-fix)
+    .row(ng-show="actionable")
+      p 誰を処刑しますか？
+      for player, username in players
+        if player.living
+          button.btn.btn-primary.col-sm-12(ng-click='submit("#{username}")', ng-disabled="sent") #{player.screenname}
+    .row(ng-show="!actionable")
+      span {{players[data.username].screenname}}に票を入れました。
+  include includes/voteList
+
+append chat
+  include includes/chat

@@ -1,0 +1,187 @@
+extends layout
+
+append css
+  link(rel='stylesheet', href='/css/bootstrap.dark.css')
+
+block content
+  h1 #{title}
+  h2 人狼について
+  blockquote
+    p.small プレイヤーはそれぞれが村人と村人に化けた人狼となり、自分自身の正体がばれないように他のプレイヤーと交渉して正体を探る。ゲームは半日単位で進行し、昼には全プレイヤーの投票により決まった人狼容疑者の処刑が、夜には人狼による村人の捕食が行われる。全ての人狼を処刑することが出来れば村人チームの勝ち、人狼と同じ数まで村人を減らすことが出来れば人狼チームの勝ちとなる。
+    small.pull-right
+      span by 
+      a(href="http://ja.wikipedia.org/wiki/%E6%B1%9D%E3%81%AF%E4%BA%BA%E7%8B%BC%E3%81%AA%E3%82%8A%E3%82%84%3F") wikipedia
+  h2 ゲームの進行
+  ul
+    li はじめにアカウントを作成し、ログインしてください。
+    li ゲームに参加するにはエントランスでエントリーして下さい。全員がReadyボタンを押すと、役職が配布されゲームが開始します。
+    li Ready?ボタンが表示されている時は、生存者全員がボタンを押すまでゲームが進行しません。(ゲーム開始、朝の通話開始など) また、時間制限がある場面では、行動できる生存者が全員行動を選択するまで次の場面に進みません。(夜時間、投票など)
+    li 死亡者はHeaven画面になり、ゲームオーバーまでは操作しなくとも自動的に進行します。
+  h2 役職早見表
+  table.table.table-condensed.table-responsive
+    tr
+      td
+      th 村人
+      th.red 人狼
+      th 占い師
+      th 霊能者
+      th 狩人
+      th.red 狂人
+      th 共有者
+      th.yellow 妖狐
+      th 猫又
+    tr
+      th 所属陣営
+      td 村人陣営
+      td.red 人狼陣営
+      td 村人陣営
+      td 村人陣営
+      td 村人陣営
+      td.red 人狼陣営
+      td 村人陣営
+      td.yellow 妖狐陣営
+      td 村人陣営
+    tr
+      th 占い/霊能結果
+      td 人間
+      td.red 人狼
+      td 人間
+      td 人間
+      td 人間
+      td 人間
+      td 人間
+      td 人間
+      td 人間
+    tr
+      th 夜行動
+      td -
+      td 噛む/狼チャット
+      td 占う
+      td 霊能
+      td 守る
+      td -
+      td 霊能チャット
+      td -
+      td -
+    tr
+      th 認知できる役職
+      td -
+      td.red 人狼
+      td -
+      td -
+      td -
+      td -
+      td 共有者
+      td -
+      td -
+    tr
+      th 噛まれた時
+      td.red 死ぬ
+      td -
+      td.red 死ぬ
+      td.red 死ぬ
+      td.red 死ぬ
+      td.red 死ぬ
+      td.red 死ぬ
+      td 死なない
+      td.red 狼を道連れに死ぬ
+    tr
+      th 占われた時
+      td -
+      td -
+      td -
+      td -
+      td -
+      td -
+      td -
+      td.red 死ぬ
+      td -
+    tr
+      th 吊られた時
+      td.red 死ぬ
+      td.red 死ぬ
+      td.red 死ぬ
+      td.red 死ぬ
+      td.red 死ぬ
+      td.red 死ぬ
+      td.red 死ぬ
+      td.red 死ぬ
+      td.red 生存者を道連れに死ぬ
+
+
+  h2 役職
+  ul
+    li
+      h3 村人
+      .row
+        .col-sm-2.col-lg-1
+          .container
+            img(src="/img/villager.png").ruleImg
+        .col-sm-10.col-lg-11
+          p 村人陣営。占い・霊能には「人間」表示。特殊能力は持たず、自分以外の役職は分からない。
+    li
+      h3.red 人狼
+      .row
+        .col-sm-2.col-lg-1
+          .container
+            img(src="/img/wereworf.png").ruleImg
+        .col-sm-10.col-lg-11
+          p 狼陣営。占い・霊能には「人狼」表示。人狼は誰が人狼であるかわかる。夜の間に人狼以外の生存者誰か一人を噛むことができ、その人が狐以外かつ狩人に守られていなければ襲撃に成功し、噛まれた人は翌朝死体となって発見される。ただし噛まれた人が猫又の場合、生き残っている人狼の内ランダムで一人が道連れとなり翌朝死体となって発見される。また、夜の間に人狼同士チャットができ、この会話内容は人狼以外には表示されない。
+    li
+      h3 占い師
+      .row
+        .col-sm-2.col-lg-1
+          .container
+            img(src="/img/seer.png").ruleImg
+        .col-sm-10.col-lg-11
+          p 村人陣営。占い・霊能には「人間」表示。夜の間に生存者の誰か一人を占い、人間か人狼か知ることができる。
+    li
+      h3 霊能者
+      .row
+        .col-sm-2.col-lg-1
+          .container
+            img(src="/img/medium.png").ruleImg
+        .col-sm-10.col-lg-11
+          p 村人陣営。占い・霊能には「人間」表示。夜の間に昨日処刑された人が人間か人狼か知ることができる。ただし、猫又による道連れの死亡者については知ることができない。
+    li
+      h3 狩人
+      .row
+        .col-sm-2.col-lg-1
+          .container
+            img(src="/img/bodyguard.png").ruleImg
+        .col-sm-10.col-lg-11
+          p 村人陣営。占い・霊能には「人間」表示。夜の間に自分以外の生存者を守ることができる。
+    li
+      h3.red 狂人
+      .row
+        .col-sm-2.col-lg-1
+          .container
+            img(src="/img/lunatic.png").ruleImg
+        .col-sm-10.col-lg-11
+          p 狼陣営。占い・霊能には「人間」表示。能力は村人と同じだが、勝利条件は狼陣営。誰が人狼であるか知ることはできない。
+    li
+      h3 共有者
+      .row
+        .col-sm-2.col-lg-1
+          .container
+            img(src="/img/freemason.png").ruleImg
+        .col-sm-10.col-lg-11
+          p 村人陣営。占い・霊能には「人間」表示。共有者は誰が共有者であるかわかる。夜の間に共有者同士チャットができ、この会話内容は共有者以外には表示されない。
+    li
+      h3.yellow 妖狐
+      .row
+        .col-sm-2.col-lg-1
+          .container
+            img(src="/img/fox.png").ruleImg
+        .col-sm-10.col-lg-11
+          p 妖狐陣営。占い・霊能には「人間」表示。狼に噛まれても死なないが、占い師に占われると死ぬ。村人・人狼陣営のいずれかが勝利条件を満たした時に生き残っていれば、妖狐陣営の単独勝利となる。
+    li
+      h3　猫又(埋毒者)
+      .row
+        .col-sm-2.col-lg-1
+          .container
+            img(src="/img/cat.png").ruleImg
+        .col-sm-10.col-lg-11
+          p 村人陣営。占い・霊能には「人間」表示。人狼に噛まれると、生き残っている人狼の内ランダムで一人を道連れにする。また投票で吊られると、生存者の内ランダムで一人を道連れにする。復活はしない。テキストベースの他の人狼ゲームにおいては、埋毒者と表記される場合が多い。
+  hr
+  a(href="/").btn.btn-primary Back

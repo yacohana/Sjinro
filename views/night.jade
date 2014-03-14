@@ -1,0 +1,51 @@
+extends game
+
+append css
+  link(rel='stylesheet', href='/css/bootstrap.dark.css')
+
+append players
+  include includes/players
+
+append action
+  form#actionForm(role="form", ng-controller="actionFormCtrl", name="action", novalidate, form-autofill-fix)
+    if(user.job=="seer")
+      .row(ng-show="actionable")
+        p 誰を占いますか？
+        for player, username in players
+          if player.living && username != user.username
+            button.btn.btn-primary.col-sm-12(ng-click='actionSeer("#{username}")', ng-disabled="sent") #{player.screenname}
+      .row(ng-show="!actionable")
+        span {{players[data.username].screenname}}を占った結果・・・
+        strong.lead(ng-style="data.style") {{(data.judgement=='black')?'人狼':'人間'}}
+        span です。
+    if(day!=0)
+      if(user.job=="medium")
+          p さっきバグ見つかったので、F5押すべしごめんなさい。
+          //.row
+            span 昨日処刑された#{players[executed].screenname}は・・・
+            if(players[executed].job=='wereworf')
+              strong.lead(style="{color:'red'}") 人狼
+            else
+              strong.lead 人間
+            span でした。
+      if(user.job=="bodyguard")
+        .row(ng-show="actionable")
+          p 誰を守りますか？
+          for player, username in players
+            if player.living && username != user.username
+              button.btn.btn-primary.col-sm-12(ng-click='actionBodyguard("#{username}")', ng-disabled="sent") #{player.screenname}
+        .row(ng-show="!actionable")
+          span {{players[data.username].screenname}}を守りました。
+      if(user.job=="wereworf")
+        .row(ng-show="actionable")
+          p 誰を噛みますか？
+          for player, username in players
+            if player.living&&player.job!="wereworf"
+              button.btn.btn-primary.col-sm-12(ng-click='actionWereworf("#{username}")', ng-disabled="sent") #{player.screenname}
+        .row(ng-show="!actionable")
+          span {{players[data.username].screenname}}を噛みました。
+    .row
+      include includes/timer
+
+append chat
+  include includes/chat

@@ -1,0 +1,19 @@
+extends layout
+
+block content
+  #container
+    h1 #{title}
+    hr
+    .row
+      .col-sm-3(ng-cloak)
+        h3 Players
+        block players
+      .col-sm-3(ng-cloak)
+        h3 Action
+        block action
+      .col-sm-6(ng-cloak)
+        h3 Chat
+        block chat
+  hr
+  a(href="/").btn.btn-primary Back
+  a(href="/auth").btn.btn-primary.pull-right Account Settings

@@ -1,0 +1,16 @@
+extends layout
+
+append css
+  link(rel='stylesheet', href='/css/bootstrap.dark.css')
+
+block content
+  #container
+    h1 Error
+    hr
+    .row
+      .col-sm-12
+        h3 エラー
+        p 現在進行中のゲームにエントリーしていません。このゲームが終了するまでお待ちください。今のゲームが終了すると自動的に切り替わります。
+  hr
+  a(href="/").btn.btn-primary Back
+  a(href="/auth").btn.btn-primary.pull-right Account Settings
