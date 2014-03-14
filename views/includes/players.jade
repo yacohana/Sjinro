@@ -9,5 +9,8 @@
   if user.job !== undefined && user.job != ""
     .container
       img(src="/img/#{user.job}.png", style="margin: 10px")
-
+  if status == "night" || true
+    input.btn.btn-sm.btn-default(type="button" value="暇つぶし" ng-click="killTime()"  popover="夜時間暇つぶしスロット。" popover-trigger="mouseenter", popover-placement="right")
+    p {{slot[0]}}{{slot[1]}}{{slot[2]}}
+    p {{killTimeMsg}}
 

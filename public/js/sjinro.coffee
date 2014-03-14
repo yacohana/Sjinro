@@ -169,7 +169,49 @@ sjinroApp.controller "playersCtrl", ($scope, Shared, $timeout) ->
     $scope.$apply ->
       $scope.players[data].ready = true
     Shared.players.set $scope.players
-
+  $scope.loaded = false
+  $scope.msgNum = 0
+  $scope.slot = [0,0,0]
+  $scope.slotstop = -1
+  $scope.killTime = ->
+    $scope.show334 = false
+    $scope.slotstop++
+    if $scope.slotstop > 1
+      if Math.random() > 0.3
+        $scope.slot[$scope.slotstop-1] = $scope.slot[$scope.slotstop-2]
+    if $scope.slotstop > 2
+      $scope.slotstop = -1
+      if $scope.slot[0] == $scope.slot[1] && $scope.slot[0] == $scope.slot[2]
+        killTimeMsg()
+    else
+      killTimeStart()
+  killTimeStart = ->
+    $timeout ->
+      $scope.$apply ->
+        if $scope.slot[$scope.slotstop] > -1
+          for i in [$scope.slotstop..2]
+            $scope.slot[i] = Math.floor(Math.random()*10)
+      killTimeStart()
+    , 30
+  killTimeMsg = ->
+    if !$scope.loaded
+      $.getScript "/js/killTime.js", ->
+        # shuffle
+        i = window.randomMsg.length
+        while --i
+          j = Math.floor(Math.random()*(i+1))
+          continue if i == j
+          k = window.randomMsg[i]
+          window.randomMsg[i] = window.randomMsg[j]
+          window.randomMsg[j] = k
+        $scope.$apply ->
+          $scope.killTimeMsg = window.randomMsg[$scope.msgNum]
+          $scope.loaded = true
+    else
+      $scope.msgNum++
+      if $scope.msgNum >= window.randomMsg.length
+        $scope.msgNum = 0
+      $scope.killTimeMsg = window.randomMsg[$scope.msgNum]
 #
 # game - entry - entry
 #
