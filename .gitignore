@@ -221,3 +221,4 @@ node_modules/
 !public/js/jquery.redirect.min.js
 /sjinro.sublime-project
 *.bat
+/*.html

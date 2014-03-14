@@ -20,7 +20,7 @@ $ ->
 #
 # load socket.io
 #
-socket = io.connect("http://sjinro.yacohana.info")
+socket = io.connect("http://localhost:3000")
 
 # for debug
 socket.on "debug", (data) ->
